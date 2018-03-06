@@ -43,4 +43,40 @@ public class Product {
         return type;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 16;
+        int result = 1;
+        result = prime * result + id.hashCode();
+        result = prime * result + price.hashCode();
+        result = prime * result + name.hashCode();
+        result = prime * result + snapshotDate.hashCode();
+        result = prime * result + type.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (!id.equals(product.id)) {
+            return false;
+        }
+        if (!price.equals(product.price)) {
+            return false;
+        }
+        if (!name.equals(product.name)) {
+            return false;
+        }
+        if (!snapshotDate.equals(product.snapshotDate)) {
+            return false;
+        }
+        if (!type.equals(product.type)) {
+            return false;
+        }
+        return true;
+    }
 }
