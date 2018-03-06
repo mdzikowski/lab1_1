@@ -30,12 +30,9 @@ public class OfferItem {
 
     private int quantity;
 
+    private Discount discount;
+
     private BigDecimal totalCost;
-
-    // discount
-    private String discountCause;
-
-    private BigDecimal discount;
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
             String productType, int quantity) {
