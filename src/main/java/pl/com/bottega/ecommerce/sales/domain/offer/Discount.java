@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 
 public class Discount {
     private String cause;
-    private BigDecimal value;
+    private Money amount;
 
-    public Discount(String discountCause, BigDecimal discount) {
+    public Discount(String discountCause, String currency, BigDecimal value) {
         this.cause = discountCause;
-        this.value = discount;
+        this.amount = new Money(currency, value);
     }
 
     public String getCause() {
         return cause;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public Money getAmount() {
+        return amount;
     }
 }
