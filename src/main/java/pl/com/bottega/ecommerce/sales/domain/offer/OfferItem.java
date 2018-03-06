@@ -19,14 +19,14 @@ public class OfferItem extends Product{
     public BigDecimal totalCost;
     public int quantity;
 
-    private Discount discount=null;
+    private Discount discountObject=null;
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
             String productType, int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
+        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null);
     }
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-            String productType, int quantity, BigDecimal discount, String discountCause) {
+            String productType, int quantity, Discount discountObject) {
         this.productId = productId;
         this.productPrice = productPrice;
         this.productName = productName;
@@ -34,12 +34,11 @@ public class OfferItem extends Product{
         this.productType = productType;
 
         this.quantity = quantity;
-        this.discount.discount = discount;
-        this.discount.discountCause = discountCause;
+        this.discountObject = discountObject;
 
         BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discountValue = discountValue.subtract(discount);
+        if (discountObject != null) {
+            discountValue = discountValue.subtract(discountObject.discount);
         }
 
         this.totalCost = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
@@ -51,7 +50,7 @@ public class OfferItem extends Product{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (discount == null ? 0 : discount.hashCode());
+        result = prime * result + (discountObject == null ? 0 : discountObject.hashCode());
         result = prime * result + (productName == null ? 0 : productName.hashCode());
         result = prime * result + (productPrice == null ? 0 : productPrice.hashCode());
         result = prime * result + (productId == null ? 0 : productId.hashCode());
@@ -73,11 +72,11 @@ public class OfferItem extends Product{
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        if (discount == null) {
-            if (other.discount != null) {
+        if (discountObject == null) {
+            if (other.discountObject != null) {
                 return false;
             }
-        } else if (!discount.equals(other.discount)) {
+        } else if (!discountObject.equals(other.discountObject)) {
             return false;
         }
         if (productName == null) {
