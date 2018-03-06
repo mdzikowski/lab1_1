@@ -70,6 +70,8 @@ public class OfferItem {
         return result;
     }
 
+    //different currencies! -> change in product and discount
+    //javadoc what does equals and what does sameAs
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,7 +88,7 @@ public class OfferItem {
         if (discount != null ? !discount.equals(offerItem.discount) : offerItem.discount != null) {
             return false;
         }
-        if (!totalCost.equals(offerItem.totalCost) {
+        if (!totalCost.equals(offerItem.totalCost)) {
             return false;
         }
         return true;
@@ -94,34 +96,12 @@ public class OfferItem {
 
     /**
      *
-     * @param item
-     * @param delta
-     *            acceptable percentage difference
+     * @param other
+     * @param delta acceptable percentage difference
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (productName == null) {
-            if (other.productName != null) {
-                return false;
-            }
-        } else if (!productName.equals(other.productName)) {
-            return false;
-        }
-        if (productPrice == null) {
-            if (other.productPrice != null) {
-                return false;
-            }
-        } else if (!productPrice.equals(other.productPrice)) {
-            return false;
-        }
-        if (productId == null) {
-            if (other.productId != null) {
-                return false;
-            }
-        } else if (!productId.equals(other.productId)) {
-            return false;
-        }
-        if (productType != other.productType) {
+        if (!product.equals(other.product)){
             return false;
         }
 
@@ -129,14 +109,17 @@ public class OfferItem {
             return false;
         }
 
+        //currencies
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.compareTo(other.totalCost) > 0) {
-            max = totalCost;
-            min = other.totalCost;
+        BigDecimal totalValue = totalCost.getValue();
+        BigDecimal totalOtherValue = other.totalCost.getValue();
+        if (totalValue.compareTo(totalOtherValue) > 0) {
+            max = totalValue;
+            min = totalOtherValue;
         } else {
-            max = other.totalCost;
-            min = totalCost;
+            max = totalOtherValue;
+            min = totalValue;
         }
 
         BigDecimal difference = max.subtract(min);
