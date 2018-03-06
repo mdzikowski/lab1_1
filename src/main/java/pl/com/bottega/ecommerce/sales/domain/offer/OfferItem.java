@@ -17,10 +17,8 @@ import java.util.Date;
 
 public class OfferItem extends Product{
 
-    private String discountCause;
 
-    private BigDecimal discount;
-
+    private Discount discount=null;
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
             String productType, int quantity) {
         this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
@@ -35,8 +33,8 @@ public class OfferItem extends Product{
         this.productType = productType;
 
         this.quantity = quantity;
-        this.discount = discount;
-        this.discountCause = discountCause;
+        this.discount.discount = discount;
+        this.discount.discountCause = discountCause;
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
