@@ -3,7 +3,7 @@ package pl.com.bottega.ecommerce.sales.domain.offer;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
+public class Product{
     public String productId;
 
     public BigDecimal productPrice;
@@ -19,5 +19,7 @@ public class Product {
     public BigDecimal totalCost;
 
     public String currency;
+
+    public Money money;
 }
 
