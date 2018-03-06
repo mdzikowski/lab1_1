@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 public class Discount {
     public String discountCause;
 
-    public BigDecimal discount;
+    public Money money;
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (discount == null ? 0 : discount.hashCode());
+        result = prime * result + (money == null ? 0 : money.hashCode());
         result = prime * result + (discountCause == null ? 0 : discountCause.hashCode());
         return result;
     }

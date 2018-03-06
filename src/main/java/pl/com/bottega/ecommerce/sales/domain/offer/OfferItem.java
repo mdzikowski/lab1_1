@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OfferItem extends Product{
-    public BigDecimal totalCost;
+    public Money totalCost;
     public int quantity;
 
     private Discount discountObject=null;
@@ -38,10 +38,10 @@ public class OfferItem extends Product{
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discountObject != null) {
-            discountValue = discountValue.subtract(discountObject.discount);
+            discountValue = discountValue.subtract(discountObject.money);
         }
 
-        this.totalCost = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
+        this.totalCost.value = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
     }
 
 

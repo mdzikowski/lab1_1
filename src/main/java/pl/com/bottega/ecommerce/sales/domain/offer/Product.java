@@ -7,7 +7,7 @@ public class Product {
     // product
     public String productId;
 
-    public BigDecimal productPrice;
+    public Money productPrice;
 
     public String productName;
 
