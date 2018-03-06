@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
-    protected String productId;
+    public String productId;
 
-    protected BigDecimal productPrice;
+    public BigDecimal productPrice;
 
-    protected String productName;
+    public String productName;
 
-    protected Date productSnapshotDate;
+    public Date productSnapshotDate;
 
-    protected String productType;
+    public String productType;
 
-    protected int quantity;
+    public int quantity;
 
-    protected BigDecimal totalCost;
+    public BigDecimal totalCost;
 
-    protected String currency;
+    public String currency;
 }
 
