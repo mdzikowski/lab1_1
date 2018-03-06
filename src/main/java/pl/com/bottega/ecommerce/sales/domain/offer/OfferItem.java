@@ -16,7 +16,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OfferItem extends Product{
-
+    public BigDecimal totalCost;
+    public int quantity;
 
     private Discount discount=null;
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
