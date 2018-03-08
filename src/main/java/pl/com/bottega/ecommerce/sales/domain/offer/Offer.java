@@ -42,14 +42,7 @@ public class Offer {
             return false;
         }
         Offer other = (Offer) obj;
-        if (availableItems == null) {
-            if (other.availableItems != null) {
-                return false;
-            }
-        } else if (!availableItems.equals(other.availableItems)) {
-            return false;
-        }
-        return true;
+        return availableItems.equals(other.getAvailableItems());
     }
 
     /**
