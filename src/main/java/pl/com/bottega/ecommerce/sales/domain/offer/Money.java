@@ -1,7 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 public class Money {
-    public int value;
+    public double value;
 
     public String currency;
 }

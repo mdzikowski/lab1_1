@@ -17,33 +17,30 @@ import java.util.Date;
 
 public class OfferItem extends Product {
 
-    // discount
     private Money money;
     private Discount discount = null;
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-                     String productType, int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null);
+    public OfferItem(Product product) {
+        this( product, null );
     }
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-                     String productType, int quantity, Discount discount) {
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
+    public OfferItem(Product product, Discount discount) {
+        this.productId = product.productId;
+        this.productPrice = product.productPrice;
+        this.productName = product.productName;
+        this.productSnapshotDate = product.productSnapshotDate;
+        this.productType = product.productType;
+        this.quantity = product.quantity;
 
-        this.quantity = quantity;
         this.discount.discount = discount.discount;
         this.discount.discountCause = discount.discountCause;
 
-        BigDecimal discountValue = new BigDecimal(0);
+        BigDecimal discountValue = new BigDecimal( 0 );
         if (discount != null) {
-            discountValue = discountValue.subtract(discount.discount);
+            discountValue = discountValue.subtract( discount.discount );
         }
 
-        this.totalCost = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
+        this.totalCost = productPrice.multiply( new BigDecimal( quantity ) ).subtract( discountValue );
     }
 
     @Override
@@ -76,28 +73,28 @@ public class OfferItem extends Product {
             if (other.discount != null) {
                 return false;
             }
-        } else if (!discount.equals(other.discount)) {
+        } else if (!discount.equals( other.discount )) {
             return false;
         }
         if (productName == null) {
             if (other.productName != null) {
                 return false;
             }
-        } else if (!productName.equals(other.productName)) {
+        } else if (!productName.equals( other.productName )) {
             return false;
         }
         if (productPrice == null) {
             if (other.productPrice != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!productPrice.equals( other.productPrice )) {
             return false;
         }
         if (productId == null) {
             if (other.productId != null) {
                 return false;
             }
-        } else if (!productId.equals(other.productId)) {
+        } else if (!productId.equals( other.productId )) {
             return false;
         }
         if (productType != other.productType) {
@@ -110,7 +107,7 @@ public class OfferItem extends Product {
             if (other.totalCost != null) {
                 return false;
             }
-        } else if (!totalCost.equals(other.totalCost)) {
+        } else if (!totalCost.equals( other.totalCost )) {
             return false;
         }
         return true;
@@ -126,21 +123,21 @@ public class OfferItem extends Product {
             if (other.productName != null) {
                 return false;
             }
-        } else if (!productName.equals(other.productName)) {
+        } else if (!productName.equals( other.productName )) {
             return false;
         }
         if (productPrice == null) {
             if (other.productPrice != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!productPrice.equals( other.productPrice )) {
             return false;
         }
         if (productId == null) {
             if (other.productId != null) {
                 return false;
             }
-        } else if (!productId.equals(other.productId)) {
+        } else if (!productId.equals( other.productId )) {
             return false;
         }
         if (productType != other.productType) {
@@ -153,7 +150,7 @@ public class OfferItem extends Product {
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.compareTo(other.totalCost) > 0) {
+        if (totalCost.compareTo( other.totalCost ) > 0) {
             max = totalCost;
             min = other.totalCost;
         } else {
@@ -161,10 +158,10 @@ public class OfferItem extends Product {
             min = totalCost;
         }
 
-        BigDecimal difference = max.subtract(min);
-        BigDecimal acceptableDelta = max.multiply(BigDecimal.valueOf(delta / 100));
+        BigDecimal difference = max.subtract( min );
+        BigDecimal acceptableDelta = max.multiply( BigDecimal.valueOf( delta / 100 ) );
 
-        return acceptableDelta.compareTo(difference) > 0;
+        return acceptableDelta.compareTo( difference ) > 0;
     }
 
 }
