@@ -5,21 +5,13 @@ import java.util.List;
 
 public class Offer {
 
-    private List<OfferItem> availableItems = new ArrayList<OfferItem>();
+    public List<OfferItem> availableItems = new ArrayList<OfferItem>();
 
-    private List<OfferItem> unavailableItems = new ArrayList<OfferItem>();
+    public List<OfferItem> unavailableItems = new ArrayList<OfferItem>();
 
     public Offer(List<OfferItem> availabeItems, List<OfferItem> unavailableItems) {
         this.availableItems = availabeItems;
         this.unavailableItems = unavailableItems;
-    }
-
-    public List<OfferItem> getAvailableItems() {
-        return availableItems;
-    }
-
-    public List<OfferItem> getUnavailableItems() {
-        return unavailableItems;
     }
 
     @Override

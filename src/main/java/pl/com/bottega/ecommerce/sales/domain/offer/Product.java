@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
-    // product
+
     public String productId;
 
     public Money productPrice;
@@ -14,6 +14,5 @@ public class Product {
     public Date productSnapshotDate;
 
     public String productType;
-
 
 }

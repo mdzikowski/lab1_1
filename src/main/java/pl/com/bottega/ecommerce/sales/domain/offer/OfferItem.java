@@ -28,7 +28,7 @@ public class OfferItem extends Product{
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
             String productType, int quantity, Discount discountObject) {
         this.productId = productId;
-        this.productPrice = productPrice;
+        this.productPrice.value = productPrice;
         this.productName = productName;
         this.productSnapshotDate = productSnapshotDate;
         this.productType = productType;
@@ -38,7 +38,7 @@ public class OfferItem extends Product{
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discountObject != null) {
-            discountValue = discountValue.subtract(discountObject.money);
+            discountValue = discountValue.subtract(discountObject.money.value);
         }
 
         this.totalCost.value = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
@@ -155,12 +155,12 @@ public class OfferItem extends Product{
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.compareTo(other.totalCost) > 0) {
-            max = totalCost;
-            min = other.totalCost;
+        if (totalCost.value.compareTo(other.totalCost.value) > 0) {
+            max = totalCost.value;
+            min = other.totalCost.value;
         } else {
-            max = other.totalCost;
-            min = totalCost;
+            max = other.totalCost.value;
+            min = totalCost.value;
         }
 
         BigDecimal difference = max.subtract(min);
