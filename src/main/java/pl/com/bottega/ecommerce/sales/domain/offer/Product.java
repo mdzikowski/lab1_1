@@ -1,13 +1,10 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
 
     private String productId;
-
-    private BigDecimal productPrice;
 
     private String productName;
 
@@ -15,11 +12,9 @@ public class Product {
 
     private String productType;
 
-    public Product(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-            String productType) {
+    public Product(String productId, String productName, Date productSnapshotDate, String productType) {
         super();
         this.productId = productId;
-        this.productPrice = productPrice;
         this.productName = productName;
         this.productSnapshotDate = productSnapshotDate;
         this.productType = productType;
@@ -27,10 +22,6 @@ public class Product {
 
     public String getProductId() {
         return productId;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
     }
 
     public String getProductName() {
@@ -51,7 +42,6 @@ public class Product {
         int result = 1;
         result = prime * result + (productId == null ? 0 : productId.hashCode());
         result = prime * result + (productName == null ? 0 : productName.hashCode());
-        result = prime * result + (productPrice == null ? 0 : productPrice.hashCode());
         result = prime * result + (productSnapshotDate == null ? 0 : productSnapshotDate.hashCode());
         result = prime * result + (productType == null ? 0 : productType.hashCode());
         return result;
@@ -81,13 +71,6 @@ public class Product {
                 return false;
             }
         } else if (!productName.equals(other.productName)) {
-            return false;
-        }
-        if (productPrice == null) {
-            if (other.productPrice != null) {
-                return false;
-            }
-        } else if (!productPrice.equals(other.productPrice)) {
             return false;
         }
         if (productSnapshotDate == null) {
