@@ -15,19 +15,20 @@ package pl.com.bottega.ecommerce.sales.domain.offer;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OfferItem{
+public class OfferItem {
 
     private Money money;
     private Discount discount = null;
-    public int quantity;
+    private int quantity;
     private Product product = null;
 
-    public OfferItem(Product product, int quantity) {
-        this( product, quantity, null );
+    public OfferItem(Product product, int quantity, Money money) {
+        this( product, quantity, money, null );
     }
 
-    public OfferItem(Product product,int quantity, Discount discount) {
+    public OfferItem(Product product, int quantity, Money money, Discount discount) {
         this.product = product;
+        this.money = money;
         this.quantity = quantity;
         this.discount = discount;
 
@@ -36,7 +37,7 @@ public class OfferItem{
             discountValue = discountValue.subtract( discount.getMoney().getValue() );
         }
 
-        this.product.totalCost = product.productPrice.multiply( new BigDecimal( quantity ) ).subtract( discountValue );
+        this.product.totalCost = product.price.multiply( new BigDecimal( quantity ) ).subtract( discountValue );
     }
 
     public Product getProduct() {
@@ -48,10 +49,10 @@ public class OfferItem{
         final int prime = 31;
         int result = 1;
         result = prime * result + (discount.getMoney() == null ? 0 : discount.getMoney().hashCode());
-        result = prime * result + (product.productName == null ? 0 : product.productName.hashCode());
-        result = prime * result + (product.productPrice == null ? 0 : product.productPrice.hashCode());
-        result = prime * result + (product.productId == null ? 0 : product.productId.hashCode());
-        result = prime * result + (product.productType == null ? 0 : product.productType.hashCode());
+        result = prime * result + (product.name == null ? 0 : product.name.hashCode());
+        result = prime * result + (product.price == null ? 0 : product.price.hashCode());
+        result = prime * result + (product.id == null ? 0 : product.id.hashCode());
+        result = prime * result + (product.type == null ? 0 : product.type.hashCode());
         result = prime * result + quantity;
         result = prime * result + (product.totalCost == null ? 0 : product.totalCost.hashCode());
         return result;
