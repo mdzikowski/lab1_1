@@ -22,41 +22,28 @@ public class OfferItem {
 
     private Money money;
 
-    // discount
-    private String discountCause;
-
-    private BigDecimal discount;
+    private Discount discount;
 
     public OfferItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
 
-    public OfferItem(Product product, int quantity, BigDecimal discount, String discountCause) {
+    public OfferItem(Product product, int quantity, Discount discount) {
         this.product = product;
-
         this.quantity = quantity;
         this.discount = discount;
-        this.discountCause = discountCause;
 
-        BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discountValue = discountValue.subtract(discount);
-        }
-
-        this.money.setCost(product.getProductPrice().multiply(new BigDecimal(quantity)).subtract(discountValue));
+        this.money.setCost(
+                product.getProductPrice().multiply(new BigDecimal(quantity)).subtract(discount.getDiscountValue()));
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public BigDecimal getDiscount() {
+    public Discount getDiscount() {
         return discount;
-    }
-
-    public String getDiscountCause() {
-        return discountCause;
     }
 
     public int getQuantity() {
@@ -72,7 +59,6 @@ public class OfferItem {
         final int prime = 31;
         int result = 1;
         result = prime * result + (discount == null ? 0 : discount.hashCode());
-        result = prime * result + (discountCause == null ? 0 : discountCause.hashCode());
         result = prime * result + (product == null ? 0 : product.hashCode());
         result = prime * result + (money == null ? 0 : money.hashCode());
         result = prime * result + quantity;
@@ -96,13 +82,6 @@ public class OfferItem {
                 return false;
             }
         } else if (!discount.equals(other.discount)) {
-            return false;
-        }
-        if (discountCause == null) {
-            if (other.discountCause != null) {
-                return false;
-            }
-        } else if (!discountCause.equals(other.discountCause)) {
             return false;
         }
         if (product == null) {
