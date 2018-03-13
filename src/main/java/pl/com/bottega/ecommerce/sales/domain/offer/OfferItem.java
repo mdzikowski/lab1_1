@@ -13,26 +13,26 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class OfferItem extends Product{
-    public Money totalCost;
-    public int quantity;
+    //private variables
+    private Money totalCost;
+    private int quantity;
 
     private Discount discountObject=null;
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-            String productType, int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null);
+    public OfferItem(Product product, int quantity, Money totalCost) {
+        this(product, quantity, totalCost,null);
     }
-
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-            String productType, int quantity, Discount discountObject) {
-        this.productId = productId;
-        this.productPrice.value = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
-
+    public OfferItem(Product product,
+                     int quantity,
+                     Money totalCost,
+                     Discount discountObject) {
+        this.productId = product.productId;
+        this.productPrice = product.productPrice;
+        this.productName = product.productName;
+        this.productSnapshotDate = product.productSnapshotDate;
+        this.productType = product.productType;
+        this.totalCost=totalCost;
         this.quantity = quantity;
         this.discountObject = discountObject;
 
@@ -41,22 +41,28 @@ public class OfferItem extends Product{
             discountValue = discountValue.subtract(discountObject.money.value);
         }
 
-        this.totalCost.value = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
+        this.totalCost.value = productPrice.value.multiply(new BigDecimal(quantity)).subtract(discountValue);
     }
 
+    public Money getTotalCost() {
+        return totalCost;
+    }
 
+    public Discount getDiscountObject() {
+        return discountObject;
+    }
 
+    public int getQuantity() {
+        return quantity;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (discountObject == null ? 0 : discountObject.hashCode());
-        result = prime * result + (productName == null ? 0 : productName.hashCode());
-        result = prime * result + (productPrice == null ? 0 : productPrice.hashCode());
-        result = prime * result + (productId == null ? 0 : productId.hashCode());
-        result = prime * result + (productType == null ? 0 : productType.hashCode());
+        result = prime * result + super.hashCode();
         result = prime * result + quantity;
         result = prime * result + (totalCost == null ? 0 : totalCost.hashCode());
+        result = prime * result + (discountObject == null ? 0 : discountObject.hashCode());
         return result;
     }
 
@@ -77,30 +83,6 @@ public class OfferItem extends Product{
                 return false;
             }
         } else if (!discountObject.equals(other.discountObject)) {
-            return false;
-        }
-        if (productName == null) {
-            if (other.productName != null) {
-                return false;
-            }
-        } else if (!productName.equals(other.productName)) {
-            return false;
-        }
-        if (productPrice == null) {
-            if (other.productPrice != null) {
-                return false;
-            }
-        } else if (!productPrice.equals(other.productPrice)) {
-            return false;
-        }
-        if (productId == null) {
-            if (other.productId != null) {
-                return false;
-            }
-        } else if (!productId.equals(other.productId)) {
-            return false;
-        }
-        if (productType != other.productType) {
             return false;
         }
         if (quantity != other.quantity) {
@@ -124,35 +106,14 @@ public class OfferItem extends Product{
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (productName == null) {
-            if (other.productName != null) {
-                return false;
-            }
-        } else if (!productName.equals(other.productName)) {
-            return false;
-        }
-        if (productPrice == null) {
-            if (other.productPrice != null) {
-                return false;
-            }
-        } else if (!productPrice.equals(other.productPrice)) {
-            return false;
-        }
-        if (productId == null) {
-            if (other.productId != null) {
-                return false;
-            }
-        } else if (!productId.equals(other.productId)) {
-            return false;
-        }
-        if (productType != other.productType) {
+        boolean checkBoolean = super.hashCode() == other.hashCode();
+        if (!checkBoolean){
             return false;
         }
 
         if (quantity != other.quantity) {
             return false;
         }
-
         BigDecimal max;
         BigDecimal min;
         if (totalCost.value.compareTo(other.totalCost.value) > 0) {

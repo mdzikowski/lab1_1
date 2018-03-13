@@ -1,8 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
-import java.math.BigDecimal;
-
 public class Discount {
+    //Simple structure, so public variables
     public String discountCause;
 
     public Money money;
