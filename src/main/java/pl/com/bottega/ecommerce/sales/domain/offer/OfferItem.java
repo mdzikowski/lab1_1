@@ -20,7 +20,7 @@ public class OfferItem {
 
     private int quantity;
 
-    private Money money;
+    private Money finalCost;
 
     private Discount discount;
 
@@ -34,7 +34,7 @@ public class OfferItem {
         this.quantity = quantity;
         this.discount = discount;
 
-        this.money.setCost(
+        this.finalCost.setCost(
                 product.getProductPrice().multiply(new BigDecimal(quantity)).subtract(discount.getDiscountValue()));
     }
 
@@ -50,8 +50,8 @@ public class OfferItem {
         return quantity;
     }
 
-    public Money getMoney() {
-        return money;
+    public Money getFinalCost() {
+        return finalCost;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class OfferItem {
         int result = 1;
         result = prime * result + (discount == null ? 0 : discount.hashCode());
         result = prime * result + (product == null ? 0 : product.hashCode());
-        result = prime * result + (money == null ? 0 : money.hashCode());
+        result = prime * result + (finalCost == null ? 0 : finalCost.hashCode());
         result = prime * result + quantity;
         return result;
     }
@@ -91,11 +91,11 @@ public class OfferItem {
         } else if (!product.equals(other.product)) {
             return false;
         }
-        if (money == null) {
-            if (other.money != null) {
+        if (finalCost == null) {
+            if (other.finalCost != null) {
                 return false;
             }
-        } else if (!money.equals(other.money)) {
+        } else if (!finalCost.equals(other.finalCost)) {
             return false;
         }
         if (quantity != other.quantity) {
@@ -119,12 +119,12 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (money.getCost().compareTo(other.getMoney().getCost()) > 0) {
-            max = money.getCost();
-            min = other.getMoney().getCost();
+        if (finalCost.getCost().compareTo(other.getFinalCost().getCost()) > 0) {
+            max = finalCost.getCost();
+            min = other.getFinalCost().getCost();
         } else {
-            max = other.getMoney().getCost();
-            min = money.getCost();
+            max = other.getFinalCost().getCost();
+            min = finalCost.getCost();
         }
 
         BigDecimal difference = max.subtract(min);
