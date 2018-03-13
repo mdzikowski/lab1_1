@@ -14,9 +14,7 @@ public class Product {
 
     public String type;
 
-    public BigDecimal totalCost;
-
-    public Money money;
+    public Money totalCost;
 
     @Override
     public int hashCode() {
@@ -27,7 +25,6 @@ public class Product {
         result = prime * result + (id == null ? 0 : id.hashCode());
         result = prime * result + (type == null ? 0 : type.hashCode());
         result = prime * result + (totalCost == null ? 0 : totalCost.hashCode());
-        result = prime * result + (money == null ? 0 : money.hashCode());
         return result;
     }
 
@@ -72,13 +69,6 @@ public class Product {
                 return false;
             }
         } else if (!totalCost.equals( other.totalCost )) {
-            return false;
-        }
-        if (money == null) {
-            if (other.money != null) {
-                return false;
-            }
-        } else if (!money.equals( other.money )) {
             return false;
         }
         return true;
