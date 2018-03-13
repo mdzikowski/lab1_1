@@ -1,21 +1,29 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 public class Discount {
-    public Money discount;
+    public Money money;
 
-    public String discountCause;
+    public String cause;
 
     public Discount(Money discount, String discountCause) {
-        this.discount = discount;
-        this.discountCause = discountCause;
+        this.money = discount;
+        this.cause = discountCause;
+    }
+
+    public Money getMoney() {
+        return money;
+    }
+
+    public String getCause() {
+        return cause;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (discount == null ? 0 : discount.hashCode());
-        result = prime * result + (discountCause == null ? 0 : discountCause.hashCode());
+        result = prime * result + (money == null ? 0 : money.hashCode());
+        result = prime * result + (cause == null ? 0 : cause.hashCode());
         return result;
     }
 
@@ -31,18 +39,18 @@ public class Discount {
             return false;
         }
         Discount other = (Discount) obj;
-        if (discount == null) {
-            if (other.discount != null) {
+        if (money == null) {
+            if (other.money != null) {
                 return false;
             }
-        } else if (!discount.equals( other.discount )) {
+        } else if (!money.equals( other.money )) {
             return false;
         }
-        if (discountCause == null) {
-            if (other.discountCause != null) {
+        if (cause == null) {
+            if (other.cause != null) {
                 return false;
             }
-        } else if (!discountCause.equals( other.discountCause )) {
+        } else if (!cause.equals( other.cause )) {
             return false;
         }
         return true;

@@ -27,19 +27,13 @@ public class OfferItem{
     }
 
     public OfferItem(Product product,int quantity, Discount discount) {
-        this.product.productId = product.productId;
-        this.product.productPrice = product.productPrice;
-        this.product.productName = product.productName;
-        this.product.productSnapshotDate = product.productSnapshotDate;
-        this.product.productType = product.productType;
+        this.product = product;
         this.quantity = quantity;
-
-        this.discount.discount = discount.discount;
-        this.discount.discountCause = discount.discountCause;
+        this.discount = discount;
 
         BigDecimal discountValue = new BigDecimal( 0 );
         if (discount != null) {
-            discountValue = discountValue.subtract( discount.discount.value );
+            discountValue = discountValue.subtract( discount.getMoney().getValue() );
         }
 
         this.product.totalCost = product.productPrice.multiply( new BigDecimal( quantity ) ).subtract( discountValue );
@@ -53,7 +47,7 @@ public class OfferItem{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (discount.discount == null ? 0 : discount.discount.hashCode());
+        result = prime * result + (discount.getMoney() == null ? 0 : discount.getMoney().hashCode());
         result = prime * result + (product.productName == null ? 0 : product.productName.hashCode());
         result = prime * result + (product.productPrice == null ? 0 : product.productPrice.hashCode());
         result = prime * result + (product.productId == null ? 0 : product.productId.hashCode());

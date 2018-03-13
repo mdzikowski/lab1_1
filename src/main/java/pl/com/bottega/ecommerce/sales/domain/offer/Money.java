@@ -7,6 +7,18 @@ public class Money {
 
     public String currency;
 
+    public Money(BigDecimal value, String currency){
+        this.value = value;
+        this.currency = currency;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+    public String getCurrency(){
+        return currency;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -29,17 +41,17 @@ public class Money {
         }
         Money other = (Money) obj;
         if (value == null) {
-            if (other.value != null) {
+            if (other.getValue() != null) {
                 return false;
             }
-        } else if (!value.equals( other.value )) {
+        } else if (!value.equals( other.getValue() )) {
             return false;
         }
         if (currency == null) {
-            if (other.currency != null) {
+            if (other.getCurrency() != null) {
                 return false;
             }
-        } else if (!currency.equals( other.currency )) {
+        } else if (!currency.equals( other.getCurrency() )) {
             return false;
         }
         return true;
