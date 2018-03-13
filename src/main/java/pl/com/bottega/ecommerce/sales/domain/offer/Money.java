@@ -8,6 +8,12 @@ public class Money {
 
     private String currency;
 
+    public Money(BigDecimal cost, String currency) {
+        super();
+        this.cost = cost;
+        this.currency = currency;
+    }
+
     public BigDecimal getCost() {
         return cost;
     }
