@@ -37,7 +37,7 @@ public int hashCode() {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        OfferItem other = (OfferItem) obj;
+        Product other = (Product) obj;
         if (productName == null) {
             if (other.productName != null) {
                 return false;
