@@ -14,7 +14,7 @@ public class Product {
 
     public String type;
 
-    public Money totalCost;
+    public Money cost;
 
     @Override
     public int hashCode() {
@@ -24,7 +24,7 @@ public class Product {
         result = prime * result + (price == null ? 0 : price.hashCode());
         result = prime * result + (id == null ? 0 : id.hashCode());
         result = prime * result + (type == null ? 0 : type.hashCode());
-        result = prime * result + (totalCost == null ? 0 : totalCost.hashCode());
+        result = prime * result + (cost == null ? 0 : cost.hashCode());
         return result;
     }
 
@@ -64,11 +64,11 @@ public class Product {
         if (type != other.type) {
             return false;
         }
-        if (totalCost == null) {
-            if (other.totalCost != null) {
+        if (cost == null) {
+            if (other.cost != null) {
                 return false;
             }
-        } else if (!totalCost.equals( other.totalCost )) {
+        } else if (!cost.equals( other.cost )) {
             return false;
         }
         return true;
