@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Offer {
-
+    //private variables
     private List<OfferItem> availableItems = new ArrayList<OfferItem>();
 
     private List<OfferItem> unavailableItems = new ArrayList<OfferItem>();
@@ -14,19 +14,19 @@ public class Offer {
         this.unavailableItems = unavailableItems;
     }
 
-    public List<OfferItem> getAvailableItems() {
+    public List<OfferItem> getAvailabeItems() {
         return availableItems;
     }
 
-    public List<OfferItem> getUnavailableItems() {
+    public List<OfferItem> getUnAvailabeItems() {
         return unavailableItems;
     }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + (availableItems == null ? 0 : availableItems.hashCode());
+        result = prime * result + (unavailableItems == null ? 0 : unavailableItems.hashCode());
         return result;
     }
 
@@ -65,7 +65,7 @@ public class Offer {
         }
 
         for (OfferItem item : availableItems) {
-            OfferItem sameItem = seenOffer.findItem(item.getProductId());
+            OfferItem sameItem = seenOffer.findItem(item.getProduct().productId);
             if (sameItem == null) {
                 return false;
             }
@@ -74,12 +74,13 @@ public class Offer {
             }
         }
 
+
         return true;
     }
 
     private OfferItem findItem(String productId) {
         for (OfferItem item : availableItems) {
-            if (item.getProductId().equals(productId)) {
+            if (item.getProduct().productId.equals(productId)) {
                 return item;
             }
         }
