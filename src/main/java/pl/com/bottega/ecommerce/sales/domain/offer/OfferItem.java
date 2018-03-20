@@ -19,7 +19,7 @@ public class OfferItem {
 
 	private Product product;
 	private Discount discount;
-	private Money money;
+	private Money totalCost;
 	private int quantity;
 
 	public OfferItem(Product product, int quantity) {
@@ -36,7 +36,7 @@ public class OfferItem {
 			BigDecimal dsc = discount.getDiscount();
 			discount.setDiscount(dsc.subtract(dsc));
 		}
-		money.setValue(product.getProductPrice().multiply(new BigDecimal(quantity)).subtract(discount.getDiscount()));
+		totalCost.setValue(product.getProductPrice().getValue().multiply(new BigDecimal(quantity)).subtract(discount.getDiscount()));
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class OfferItem {
 		result = prime * result + (product == null ? 0 : product.hashCode());
 		result = prime * result + quantity;
 		result = prime * result + (discount == null ? 0 : discount.hashCode());
-		result = prime * result + (money == null ? 0 : money.hashCode());
+		result = prime * result + (totalCost == null ? 0 : totalCost.hashCode());
 
 		return result;
 	}
@@ -64,7 +64,7 @@ public class OfferItem {
 		}
 		OfferItem other = (OfferItem) obj;
 		return product.equals(other.getProduct()) && discount.equals(other.getDiscount())
-				&& money.equals(other.getMoney()) && quantity == other.getQuantity();
+				&& totalCost.equals(other.getTotalCost()) && quantity == other.getQuantity();
 	}
 
 	/**
@@ -85,12 +85,12 @@ public class OfferItem {
 
 		BigDecimal max;
 		BigDecimal min;
-		if (money.getValue().compareTo(other.money.getValue()) > 0) {
-			max = money.getValue();
-			min = other.money.getValue();
+		if (totalCost.getValue().compareTo(other.totalCost.getValue()) > 0) {
+			max = totalCost.getValue();
+			min = other.totalCost.getValue();
 		} else {
-			max = other.money.getValue();
-			min = money.getValue();
+			max = other.totalCost.getValue();
+			min = totalCost.getValue();
 		}
 
 		BigDecimal difference = max.subtract(min);
@@ -115,12 +115,12 @@ public class OfferItem {
 		this.discount = discount;
 	}
 
-	public Money getMoney() {
-		return money;
+	public Money getTotalCost() {
+		return totalCost;
 	}
 
-	public void setMoney(Money money) {
-		this.money = money;
+	public void setTotalCost(Money totalCost) {
+		this.totalCost = totalCost;
 	}
 
 	public int getQuantity() {
