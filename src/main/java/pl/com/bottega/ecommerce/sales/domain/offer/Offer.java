@@ -46,17 +46,15 @@ public class Offer {
             if (other.availableItems != null) {
                 return false;
             }
-        } else if (!availableItems.equals(other.availableItems)) {
+        } else if (!availableItems.equals( other.availableItems )) {
             return false;
         }
         return true;
     }
 
     /**
-     *
      * @param seenOffer
-     * @param delta
-     *            acceptable difference in percent
+     * @param delta     acceptable difference in percent
      * @return
      */
     public boolean sameAs(Offer seenOffer, double delta) {
@@ -65,11 +63,11 @@ public class Offer {
         }
 
         for (OfferItem item : availableItems) {
-            OfferItem sameItem = seenOffer.findItem(item.getProductId());
+            OfferItem sameItem = seenOffer.findItem( item.getProduct().id );
             if (sameItem == null) {
                 return false;
             }
-            if (!sameItem.sameAs(item, delta)) {
+            if (!sameItem.sameAs( item, delta )) {
                 return false;
             }
         }
@@ -77,9 +75,9 @@ public class Offer {
         return true;
     }
 
-    private OfferItem findItem(String productId) {
+    private OfferItem findItem(String id) {
         for (OfferItem item : availableItems) {
-            if (item.getProductId().equals(productId)) {
+            if (item.getProduct().id.equals( id )) {
                 return item;
             }
         }
