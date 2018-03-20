@@ -34,10 +34,10 @@ public class OfferItem {
 
         BigDecimal discountValue = new BigDecimal( 0 );
         if (discount != null) {
-            discountValue = discountValue.subtract( discount.getMoney().getValue() );
+            discountValue = discountValue.subtract( discount.getDiscountPrice().getValue() );
         }
 
-        this.product.cost.value = product.price.multiply( new BigDecimal( quantity ) ).subtract( discountValue );
+        this.product.price.value = product.price.value.multiply( new BigDecimal( quantity ) ).subtract( discountValue );
     }
 
     public Product getProduct() {
@@ -48,13 +48,12 @@ public class OfferItem {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (discount.getMoney() == null ? 0 : discount.getMoney().hashCode());
+        result = prime * result + (discount.getDiscountPrice() == null ? 0 : discount.getDiscountPrice().hashCode());
         result = prime * result + (product.name == null ? 0 : product.name.hashCode());
         result = prime * result + (product.price == null ? 0 : product.price.hashCode());
         result = prime * result + (product.id == null ? 0 : product.id.hashCode());
         result = prime * result + (product.type == null ? 0 : product.type.hashCode());
         result = prime * result + quantity;
-        result = prime * result + (product.cost == null ? 0 : product.cost.hashCode());
         return result;
     }
 
@@ -106,12 +105,12 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (product.cost.getValue().compareTo( other.product.cost.getValue() ) > 0) {
-            max = product.cost.getValue();
-            min = other.product.cost.getValue();
+        if (product.price.getValue().compareTo( other.product.price.getValue() ) > 0) {
+            max = product.price.getValue();
+            min = other.product.price.getValue();
         } else {
-            max = other.product.cost.getValue();
-            min = product.cost.getValue();
+            max = other.product.price.getValue();
+            min = product.price.getValue();
         }
 
         BigDecimal difference = max.subtract( min );

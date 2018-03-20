@@ -6,15 +6,13 @@ import java.util.Date;
 public class Product {
     public String id;
 
-    public BigDecimal price;
+    public Money price;
 
     public String name;
 
     public Date snapshotDate;
 
     public String type;
-
-    public Money cost;
 
     @Override
     public int hashCode() {
@@ -24,7 +22,6 @@ public class Product {
         result = prime * result + (price == null ? 0 : price.hashCode());
         result = prime * result + (id == null ? 0 : id.hashCode());
         result = prime * result + (type == null ? 0 : type.hashCode());
-        result = prime * result + (cost == null ? 0 : cost.hashCode());
         return result;
     }
 
@@ -62,13 +59,6 @@ public class Product {
             return false;
         }
         if (type != other.type) {
-            return false;
-        }
-        if (cost == null) {
-            if (other.cost != null) {
-                return false;
-            }
-        } else if (!cost.equals( other.cost )) {
             return false;
         }
         return true;
