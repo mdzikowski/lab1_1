@@ -59,6 +59,10 @@ public class OfferItem {
         return quantity;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -109,7 +113,10 @@ public class OfferItem {
             return false;
         }
 
-        //currencies
+        if (!totalCost.getCurrency().equals(other.totalCost.getCurrency())) {
+            return false;
+        }
+
         BigDecimal max;
         BigDecimal min;
         BigDecimal totalValue = totalCost.getValue();
