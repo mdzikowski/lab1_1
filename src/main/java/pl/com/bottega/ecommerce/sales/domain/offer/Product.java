@@ -46,4 +46,21 @@ public class Product {
         return result;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Product newProduct = (Product) obj;
+        return productId.equals(newProduct.getProductId()) && productPrice.equals(newProduct.getProductPrice()) &&
+                productName.equals(newProduct.getProductName()) &&
+                productSnapshotDate.equals(newProduct.getProductSnapshotDate()) &&
+                productType.equals(newProduct.getProductType());
+    }
 }

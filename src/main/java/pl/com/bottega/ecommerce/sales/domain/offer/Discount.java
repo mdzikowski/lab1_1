@@ -29,4 +29,19 @@ public class Discount {
         result = prime * result + (discountCause == null ? 0 : discountCause.hashCode());
         return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Discount newDiscount = (Discount) obj;
+        return discountCause.equals(newDiscount.getDiscountCause()) && discount.equals(newDiscount.getDiscount());
+    }
 }
