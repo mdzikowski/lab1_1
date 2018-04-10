@@ -52,20 +52,14 @@ public class Offer {
         return true;
     }
 
-    /**
-     *
-     * @param seenOffer
-     * @param delta
-     *            acceptable difference in percent
-     * @return
-     */
-    public boolean sameAs(Offer seenOffer, double delta) {
+    
+    public boolean sameAs(Offer seenOffer, double delta) { 
         if (availableItems.size() != seenOffer.availableItems.size()) {
             return false;
         }
 
         for (OfferItem item : availableItems) {
-            OfferItem sameItem = seenOffer.findItem(item.getProductId());
+            OfferItem sameItem = seenOffer.findItem(item.getProduct().getProductId());
             if (sameItem == null) {
                 return false;
             }
